@@ -1,15 +1,14 @@
 package test
 
 import (
+	"fmt"
+	"github.com/astaxie/beego/logs"
 	_ "glory-golang/routers"
-	"net/http"
-	"net/http/httptest"
 	"path/filepath"
 	"runtime"
 	"testing"
 
 	"github.com/astaxie/beego"
-	. "github.com/smartystreets/goconvey/convey"
 )
 
 func init() {
@@ -20,18 +19,24 @@ func init() {
 
 // TestBeego is a sample to run an endpoint test
 func TestBeego(t *testing.T) {
-	r, _ := http.NewRequest("GET", "/", nil)
-	w := httptest.NewRecorder()
-	beego.BeeApp.Handlers.ServeHTTP(w, r)
 
-	beego.Trace("testing", "TestBeego", "Code[%d]\n%s", w.Code, w.Body.String())
+	logs.Info("this %s cat is %v years old", "yellow", 3)
+	logs.Debug("this %s cat is %v years old", "yellow", 3)
+	logs.Error("this %s cat is %v years old", "yellow", 3)
+	fmt.Print("1111")
 
-	Convey("Subject: Test Station Endpoint\n", t, func() {
-		Convey("Status Code Should Be 200", func() {
-			So(w.Code, ShouldEqual, 200)
-		})
-		Convey("The Result Should Not Be Empty", func() {
-			So(w.Body.Len(), ShouldBeGreaterThan, 0)
-		})
-	})
+	//r, _ := http.NewRequest("GET", "/", nil)
+	//w := httptest.NewRecorder()
+	//beego.BeeApp.Handlers.ServeHTTP(w, r)
+	//
+	//beego.Trace("testing", "TestBeego", "Code[%d]\n%s", w.Code, w.Body.String())
+	//
+	//Convey("Subject: Test Station Endpoint\n", t, func() {
+	//	Convey("Status Code Should Be 200", func() {
+	//		So(w.Code, ShouldEqual, 200)
+	//	})
+	//	Convey("The Result Should Not Be Empty", func() {
+	//		So(w.Body.Len(), ShouldBeGreaterThan, 0)
+	//	})
+	//})
 }
