@@ -24,6 +24,9 @@ func init() {
 	orm.RegisterDataBase("default", "mysql", beego.AppConfig.String("username")+":"+beego.AppConfig.String("password")+"@tcp("+beego.AppConfig.String("address")+":"+beego.AppConfig.String("port")+")/"+beego.AppConfig.String("dbname")+"?charset=utf8&parseTime=True&loc=Local", 30, 30)
 	orm.Debug = true
 
+	orm.SetMaxIdleConns("default", 20)
+	orm.SetMaxOpenConns("default", 100)
+
 	////访问接口前验证token
 	//var filterUser = func(ctx *context.Context) {
 	//	url := ctx.Request.RequestURI

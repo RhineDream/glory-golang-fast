@@ -1,4 +1,4 @@
-package models
+package business
 
 // 学生
 type Student struct {

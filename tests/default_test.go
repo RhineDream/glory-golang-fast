@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/astaxie/beego/logs"
 	_ "glory-golang/routers"
+	"glory-golang/utils"
 	"path/filepath"
 	"runtime"
 	"testing"
@@ -25,6 +26,8 @@ func TestBeego(t *testing.T) {
 	logs.Error("this %s cat is %v years old", "yellow", 3)
 	fmt.Print("1111")
 
+	uuid := utils.GetUUID()
+	fmt.Print(uuid)
 	//r, _ := http.NewRequest("GET", "/", nil)
 	//w := httptest.NewRecorder()
 	//beego.BeeApp.Handlers.ServeHTTP(w, r)

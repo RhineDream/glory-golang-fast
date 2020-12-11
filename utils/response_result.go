@@ -1,4 +1,4 @@
-package result
+package utils
 
 /**
 封装请求返回值
