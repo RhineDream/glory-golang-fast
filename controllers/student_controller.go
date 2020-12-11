@@ -2,14 +2,14 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	jsoniter "github.com/json-iterator/go"
 	"glory-golang/models"
+	result "glory-golang/utils"
 )
 
 type StudentController struct {
-	beego.Controller
+	BaseController
 }
 
 func (c *StudentController) List() {
@@ -30,9 +30,8 @@ func (c *StudentController) GetById() {
 
 	fmt.Println(form)
 
-	logs.Info("this %s cat is %v years old", "yellow", 3)
 	logs.Info("ParseLoginForm:", &form)
 
 	//c.Data["json"] = result.SuccessResult(&form)
-	//c.ServeJSON()
+	c.SendResponse(result.OkResult(&form))
 }
