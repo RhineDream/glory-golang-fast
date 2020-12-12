@@ -2,7 +2,6 @@ package test
 
 import (
 	"fmt"
-	"github.com/astaxie/beego/logs"
 	_ "glory-golang/routers"
 	"glory-golang/utils"
 	"path/filepath"
@@ -21,13 +20,18 @@ func init() {
 // TestBeego is a sample to run an endpoint test
 func TestBeego(t *testing.T) {
 
-	logs.Info("this %s cat is %v years old", "yellow", 3)
-	logs.Debug("this %s cat is %v years old", "yellow", 3)
-	logs.Error("this %s cat is %v years old", "yellow", 3)
-	fmt.Print("1111")
+	//logs.Info("this %s cat is %v years old", "yellow", 3)
+	//logs.Debug("this %s cat is %v years old", "yellow", 3)
+	//logs.Error("this %s cat is %v years old", "yellow", 3)
+	//fmt.Print("1111")
+	//
+	//uuid := utils.GetUUID()
+	//fmt.Print(uuid)
 
-	uuid := utils.GetUUID()
-	fmt.Print(uuid)
+	time := utils.GetCurrentTime()
+	fmt.Println(time)
+	timeString := utils.GetCurrentTimeString()
+	fmt.Println(timeString)
 	//r, _ := http.NewRequest("GET", "/", nil)
 	//w := httptest.NewRecorder()
 	//beego.BeeApp.Handlers.ServeHTTP(w, r)

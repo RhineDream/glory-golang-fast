@@ -2,7 +2,6 @@ package system
 
 import (
 	"glory-golang/common"
-	"glory-golang/models/business"
 	"glory-golang/models/system"
 	system2 "glory-golang/service/system"
 	"glory-golang/service/system/impl"
@@ -20,33 +19,79 @@ func (c *UserController) GetUserList() {
 	var form system.SysUser
 	c.GetRequestBodyJson(&form)
 
-	// 实例化接口实现类
-	f := new(impl.UserServiceImpl)
-	// 声明一个UserService的接口
-	var service system2.UserService
-	// 将接口赋值f，也就是*file类型
-	service = f
-	// 使用GetUserListService接口进行数据写入
-	listService := service.GetUserList(&form)
+	//  声明一个UserService的接口 = 实例化接口实现类
+	var service system2.UserService = new(impl.UserServiceImpl)
 
-	c.SendResponse(result.OkResult(listService))
+	// 使用GetUserListService接口进行数据写入
+	pageInfo := service.GetUserList(&form)
+
+	c.SendResponse(result.OkResult(pageInfo))
 }
 
-func (c *UserController) GetById() {
+/**
+ * 根据id查询
+ */
+func (c *UserController) GetUserById() {
 	//json方式提交
-	var form business.Student
+	var form system.SysUser
 	c.GetRequestBodyJson(&form)
 
-	//sysUser := system.SysUser{Id: result.GetUUID(),Username:"zhangsansss"}
+	//  声明一个UserService的接口 = 实例化接口实现类
+	var service system2.UserService = new(impl.UserServiceImpl)
 
-	//_, err := system.AddSysUser(&sysUser)
-	//if(err != nil){
-	//	logs.Info("异常")
-	//}
-	//
-	//logs.Info("ParseLoginForm:", &form)
-	//stu := business2.GetStudentById(form)
-	//stu2 := business2.GetTeacherById(form)
-	//logs.Info("ParseLoginForm:", &stu2)
-	//c.SendResponse(result.OkResult(&stu))
+	// 使用GetUserListService接口进行数据写入
+	results := service.GetUserById(&form)
+
+	c.SendResponse(result.OkResult(results))
+}
+
+/**
+ * 插入
+ */
+func (c *UserController) InsertUser() {
+	//json方式提交
+	var form system.SysUser
+	c.GetRequestBodyJson(&form)
+
+	//  声明一个UserService的接口 = 实例化接口实现类
+	var service system2.UserService = new(impl.UserServiceImpl)
+
+	// 使用GetUserListService接口进行数据写入
+	res := service.InsertUser(&form)
+
+	c.SendResponse(res)
+}
+
+/**
+ * 插入
+ */
+func (c *UserController) UpdateUser() {
+	//json方式提交
+	var form system.SysUser
+	c.GetRequestBodyJson(&form)
+
+	//  声明一个UserService的接口 = 实例化接口实现类
+	var service system2.UserService = new(impl.UserServiceImpl)
+
+	// 使用GetUserListService接口进行数据写入
+	res := service.UpdateUser(&form)
+
+	c.SendResponse(res)
+}
+
+/**
+ * 删除
+ */
+func (c *UserController) DeleteUser() {
+	//json方式提交
+	var form system.SysUser
+	c.GetRequestBodyJson(&form)
+
+	//  声明一个UserService的接口 = 实例化接口实现类
+	var service system2.UserService = new(impl.UserServiceImpl)
+
+	// 使用GetUserListService接口进行数据写入
+	res := service.DeleteUser(&form)
+
+	c.SendResponse(res)
 }

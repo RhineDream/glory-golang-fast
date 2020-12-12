@@ -1,21 +1,44 @@
 package impl
 
 import (
-	system2 "glory-golang/dao/system"
+	"glory-golang/dao/systemdao"
 	"glory-golang/models/system"
+	result "glory-golang/utils"
 )
 
 type UserServiceImpl struct {
 }
 
-func (d *UserServiceImpl) GetUserList(user *system.SysUser) []system.SysUser {
-	users := []system.SysUser{}
-	//sysUser1 := system.SysUser{Id: result.GetUUID(),Username:"zhangsansss"}
+func (d *UserServiceImpl) GetUserList(user *system.SysUser) result.PageInfo {
+	list := systemdao.GetUserList(user)
+	return list
+}
 
-	sysUser, err := system2.GetSysUserById(user.Id)
-	if err != nil {
+func (d *UserServiceImpl) GetUserById(user *system.SysUser) system.SysUser {
+	result := systemdao.GetUserById(user)
+	return result
+}
 
+func (d *UserServiceImpl) InsertUser(user *system.SysUser) interface{} {
+	flag, id := systemdao.InsertUser(user)
+	if flag {
+		return result.OkResult(id)
 	}
-	users = append(users, *sysUser)
-	return users
+	return result.Fail(500, "保存失败")
+}
+
+func (d *UserServiceImpl) UpdateUser(user *system.SysUser) interface{} {
+	flag, id := systemdao.UpdateUser(user)
+	if flag {
+		return result.OkResult(id)
+	}
+	return result.Fail(500, "修改失败")
+}
+
+func (d *UserServiceImpl) DeleteUser(user *system.SysUser) interface{} {
+	flag := systemdao.DeleteUser(user)
+	if flag {
+		return result.Ok()
+	}
+	return result.Fail(500, "修改失败")
 }
